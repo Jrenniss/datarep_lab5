@@ -3,7 +3,15 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-const path = require('path')
+const path = require('path');
+const bodyParser = require("body-parser");
+
+//Used for any Request on the Server
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 //Creating Roots - http://localhost:3000
 app.get('/', (req, res) => {
@@ -41,6 +49,16 @@ app.get('/api/movies',(req, res)=>{
 //New Route - HTML Page - http://localhost:3000/test
 app.get('/test', (req, res)=>{
     res.sendFile(__dirname + '/index.html');
+})
+
+//GET Method - 
+app.get('/name', (req, res)=>{
+    res.send('Hello ' +req.query.fname + ' ' + req.query.lname);
+})
+
+//POST Method - 
+app.post('/name', (req, res)=>{
+    res.send('Hello ' + req.body.fname + ' ' + req.body.lname);
 })
 
 //Set up the web Server
