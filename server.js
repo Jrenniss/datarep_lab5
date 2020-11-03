@@ -3,19 +3,21 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+const path = require('path')
+
 //Creating Roots - http://localhost:3000
 app.get('/', (req, res) => {
   res.send('Welcome to Data Representation and Querying!')
 })
 
-//New Root Path - http://localhost:3000/hello
+//New Route Path - http://localhost:3000/hello
 //Basic API - http request and response using names
 app.get('/hello/:name',(req, res)=>{
     console.log(req.params.name);
     res.send('Hello ' + req.params.name);
 })
 
-//New Root Movies API
+//New Route  - API Movies - http://localhost:3000/api/movies
 app.get('/api/movies',(req, res)=>{
     const mymovies =[
             {
@@ -34,6 +36,11 @@ app.get('/api/movies',(req, res)=>{
             }
     ];
     res.json({movies:mymovies});
+})
+
+//New Route - HTML Page - http://localhost:3000/test
+app.get('/test', (req, res)=>{
+    res.sendFile(__dirname + '/index.html');
 })
 
 //Set up the web Server
